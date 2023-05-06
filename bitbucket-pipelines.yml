@@ -1,0 +1,35 @@
+image: gradle:jdk17
+
+# The minimum steps required to deploy from Bitbucket to Heroku are:
+# 1. create a TGZ file with the application source code
+# 2. send that TGZ to Heroku
+pipelines:
+  default:
+# We should enable the step bellow to run the tests before sending the package to Heroku
+#    - step:
+#        name: Test
+#        caches:
+#          - gradle
+#        script:
+#          - gradle --version
+#          - gradle test
+
+    - step:
+        name: Create TGZ from source code
+        script:
+          - ls -la
+          - tar --exclude='.git' -cvzf /tmp/app.tar.gz .
+          - mv /tmp/app.tar.gz .
+          - ls -la
+        artifacts:
+          - app.tar.gz
+
+    - step:
+        name: Deploy source code TGZ to heroku
+        deployment: production
+        script:
+          - pipe: atlassian/heroku-deploy:0.1.1
+            variables:
+              HEROKU_API_KEY: $HEROKU_API_KEY
+              HEROKU_APP_NAME: $HEROKU_APP_NAME
+              ZIP_FILE: app.tar.gz
