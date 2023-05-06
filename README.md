@@ -18,18 +18,17 @@ to the repo at Bitbucket.
 2. The Bitbucket pipeline will just create a 'tgz' file with the application source code and send that package to Heroku
 3. Heroku receives the package, builds the application, then deploys the executable 'jar' file.
 
-## Heroku configuration
+## Heroku Application Configuration
 1. Create the application
 2. Create an api key to be used by Bitbucket to invoke Heroku's API
 3. Set the `heroku/gradle` buildpack in the application settings:
 `Go to your application root page in Heroku -> Settings -> Buildpacks -> Add Buildpack -> 'heroku/gradle'`
 
-## Bitbucket configuration
+## Bitbucket Repository Configuration
 1. You need to enable pipeline execution in the repository configuration:  
 `Bitbucket -> Repository root page -> Repository Settings -> Pipeline Settings -> check 'Enable Pipelines'`
-2. Set the in the repository configuration the environment variables that are used in the [./bitbucket-pipelines.yml](./bitbucket-pipelines.yml) file:  
-`Bitbucket -> Repository root page -> Repository Settings -> Pipeline Settings -> check 'Repository Variables'`.   
-The variables are:
+2. Set the environment variables that are used by the [./bitbucket-pipelines.yml](./bitbucket-pipelines.yml) file:  
+`Bitbucket -> Repository root page -> Repository Settings -> Pipeline Settings -> check 'Repository Variables'`, then set:
     * HEROKU_APP_NAME: the name your gave to your application in Heroku 
     * HEROKU_API_KEY: the api key you created in Heroku to allow api requests to your application 
 
