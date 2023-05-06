@@ -20,7 +20,7 @@ to the repo at Bitbucket.
 
 ## Heroku configuration
 1. Create the application
-2. Create an api key to be used by Bitbucket to connect to Heroku and send the package
+2. Create an api key to be used by Bitbucket to invoke Heroku's API
 3. Set the `heroku/gradle` buildpack in the application settings:
 `Go to your application root page in Heroku -> Settings -> Buildpacks -> Add Buildpack -> 'heroku/gradle'`
 
